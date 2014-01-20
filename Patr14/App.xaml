@@ -9,6 +9,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <caliburnMicro:Bootstrapper x:Key="bootstrapper" />
+        <local:LocalizedStrings xmlns:local="clr-namespace:Patr14" x:Key="LocalizedStrings"/>
     </Application.Resources>
 
 

@@ -11,7 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -20,16 +21,74 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="24,0,24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,12" >
+                <TextBlock Text="{Binding Path=LocalizedResources.Average, Source={StaticResource LocalizedStrings}, StringFormat='{}{0}:' }" />
+                <TextBlock Text="{Binding AverageGrade, StringFormat=N1}" Margin="4,0,0,0"/>
+            </StackPanel>
+
+            <ListBox Grid.Row="1" Name="StudentList" ItemsSource="{Binding Students, Mode=OneWay}" >
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="0" Padding="0,12">
+                            <!--DoubleTap="StudentList_DoubleTap"> -->
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="0,0,4,0" />
+                                    </Style>
+                                </Grid.Resources>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{Binding Path=LocalizedResources.FirstName, Source={StaticResource LocalizedStrings}, StringFormat='{}{0}:'}" Grid.Row="0" Grid.Column="0" />
+                                <TextBlock Text="{Binding Path=LocalizedResources.LastName, Source={StaticResource LocalizedStrings}, StringFormat='{}{0}:'}" Grid.Row="1" Grid.Column="0" />
+                                <TextBlock Text="{Binding Path=LocalizedResources.Grade, Source={StaticResource LocalizedStrings}, StringFormat='{}{0}:'}" Grid.Row="2" Grid.Column="0" />
+
+                                <TextBlock Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" />
+                                <TextBlock Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" />
+                                <TextBlock Text="{Binding Grade}" Grid.Row="2" Grid.Column="1" />
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
         </Grid>
+
+        <bab:BindableAppBar x:Name="AppBar">
+            <bab:BindableAppBarButton x:Name="AddStudent"
+                                  Text="{Binding Path=LocalizedResources.Add, Source={StaticResource LocalizedStrings}}"
+                                  IconUri="Images/add.png"                                
+                                  />
+        </bab:BindableAppBar>
+
     </Grid>
 
 </phone:PhoneApplicationPage>

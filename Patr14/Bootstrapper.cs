@@ -1,10 +1,12 @@
 ﻿using Caliburn.Micro;
+using Caliburn.Micro.BindableAppBar;
 using Patr14.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace CaliburnMicro
 {
@@ -27,7 +29,10 @@ namespace CaliburnMicro
 
         static void AddCustomConventions()
         {
-            //ellided 
+            ConventionManager.AddElementConvention<BindableAppBarButton>(
+            Control.IsEnabledProperty, "DataContext", "Click");
+            ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
+            Control.IsEnabledProperty, "DataContext", "Click");
         }
 
         protected override object GetInstance(Type service, string key)

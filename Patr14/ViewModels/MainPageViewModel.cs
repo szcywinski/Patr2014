@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,23 @@ using System.Windows;
 
 namespace Patr14.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : PropertyChangedBase
     {
+        private decimal averageGrade;
+
+        public decimal AverageGrade
+        {
+            get { return averageGrade; }
+            set 
+            { 
+                averageGrade = value;
+                NotifyOfPropertyChange(() => AverageGrade);
+            }
+        }
+
         public MainPageViewModel()
         {
-            MessageBox.Show("I'm the MainView!");
+            AverageGrade = 3.456m;
         }
     }
 }
