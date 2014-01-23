@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Caliburn.Micro.BindableAppBar;
+using Patr14.Utils;
 using Patr14.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,18 @@ namespace CaliburnMicro
         protected override void BuildUp(object instance)
         {
             container.BuildUp(instance);
+        }
+
+        protected override void OnClose(object sender, Microsoft.Phone.Shell.ClosingEventArgs e)
+        {
+            base.OnClose(sender, e);
+            StudentService.Instance.SaveState();
+        }
+
+        protected override void OnDeactivate(object sender, Microsoft.Phone.Shell.DeactivatedEventArgs e)
+        {
+            base.OnDeactivate(sender, e);
+            StudentService.Instance.SaveState();
         }
     }
 }

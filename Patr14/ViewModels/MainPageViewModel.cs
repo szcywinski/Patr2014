@@ -22,9 +22,8 @@ namespace Patr14.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
-
             StudentServ = StudentService.Instance;
-            StudentServ.AddStudent(new Student() { FirstName = "Janusz", LastName = "Pień", Grade = 3.0m });
+           
         }
 
         public void AddStudent()
