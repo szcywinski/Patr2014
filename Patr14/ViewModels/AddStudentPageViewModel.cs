@@ -17,6 +17,7 @@ namespace Patr14.ViewModels
 
         private Student currentStudent;
         private Student editedStudent;
+        private ObservableCollection<Decimal> grades = new ObservableCollection<Decimal> { 2, 2.5m, 3, 3.5m, 4, 4.5m, 5 };
         private bool canSave;
 
         public AddStudentPageViewModel(INavigationService navigationService)
@@ -38,7 +39,7 @@ namespace Patr14.ViewModels
 
         public ObservableCollection<Decimal> Grades
         {
-             get{ return new ObservableCollection<Decimal>() { 2, 2.5m, 3, 3.5m, 4, 4.5m, 5 };}
+             get{ return grades;}
         }
           
         
