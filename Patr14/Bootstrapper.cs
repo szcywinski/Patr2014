@@ -33,8 +33,6 @@ namespace CaliburnMicro
         {
             ConventionManager.AddElementConvention<BindableAppBarButton>(
             Control.IsEnabledProperty, "DataContext", "Click");
-            ConventionManager.AddElementConvention<BindableAppBarMenuItem>(
-            Control.IsEnabledProperty, "DataContext", "Click");
         }
 
         protected override object GetInstance(Type service, string key)
