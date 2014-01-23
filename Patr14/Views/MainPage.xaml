@@ -39,7 +39,7 @@
                 <TextBlock Text="{Binding StudentServ.AverageGrade, StringFormat=N1}" Margin="4,0,0,0"/>
             </StackPanel>
 
-            <ListBox Grid.Row="1" Name="StudentServ_Students">
+            <ListBox Grid.Row="1" Name="StudentServ_Students" ItemsSource="{Binding StudentServ.Students, Mode=OneWay}" SelectedItem="{Binding SelectedStudent, Mode=TwoWay}" >
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

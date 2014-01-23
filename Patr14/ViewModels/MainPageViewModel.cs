@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Phone.Shell;
 using Patr14.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,10 @@ namespace Patr14.ViewModels
     {
               
         private readonly INavigationService navigationService;
-
-
+ 
         private StudentService studentServ;
         private Student selectedStudent;
- 
+
         public MainPageViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
@@ -28,6 +28,7 @@ namespace Patr14.ViewModels
 
         public void AddStudent()
         {
+            PhoneApplicationService.Current.State["CurrentStudent"] = null;
             navigationService.UriFor<AddStudentPageViewModel>().Navigate();
         }
 
@@ -38,7 +39,8 @@ namespace Patr14.ViewModels
             {
                 selectedStudent = value;
                 NotifyOfPropertyChange(() => SelectedStudent);
-                MessageBox.Show(value.Grade.ToString());
+                PhoneApplicationService.Current.State["CurrentStudent"] = value; 
+                navigationService.UriFor<AddStudentPageViewModel>().Navigate();
             }
         }
 

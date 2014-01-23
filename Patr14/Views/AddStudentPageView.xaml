@@ -48,9 +48,9 @@
             <TextBox Name="CurrentStudent_LastName" cal:Message.Attach="[Event TextChanged] = [Action DataChanged]" Grid.Row="3" Height="72" TextWrapping="Wrap" />
             <TextBlock Grid.Row="4" Text="{Binding Path=LocalizedResources.Grade, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" />
             <toolkit:ListPicker Grid.Row="5"
-                                
                                 ItemsSource="{Binding Grades}"
                                 SelectedItem="{Binding CurrentStudent.Grade, Mode=TwoWay}"
+                                cal:Message.Attach="[Event SelectionChanged] = [Action DataChanged]"
                                 FullModeHeader="{Binding Path=LocalizedResources.Grade, Source={StaticResource LocalizedStrings}}"
                                 Margin="24,12,12,0"/>
         </Grid>
