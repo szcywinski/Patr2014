@@ -23,6 +23,7 @@ namespace CaliburnMicro
 
             container.RegisterPhoneServices(RootFrame);
             container.PerRequest<MainPageViewModel>();
+            container.PerRequest<AddStudentPageViewModel>();
 
             AddCustomConventions();
         }
